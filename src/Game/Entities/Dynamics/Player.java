@@ -136,6 +136,17 @@ public class Player extends BaseDynamicEntity implements Fighter {
 
 		canMove = true;
 
+		if (handler.getKeyManager().debugButton) {
+			GameSetUp.DEBUGMODE = !GameSetUp.DEBUGMODE;
+		}
+		
+		if (GameSetUp.DEBUGMODE == true) {
+			if (handler.getKeyManager().healButton) {
+				handler.getEntityManager().getPlayer().health = handler.getEntityManager().getPlayer().maxHealth;
+				handler.getEntityManager().getPlayer().mana = handler.getEntityManager().getPlayer().maxMana;
+			}
+		}
+		
 		if (handler.getKeyManager().runbutt) {
 			speed = 2;
 		} else {
