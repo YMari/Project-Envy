@@ -429,6 +429,16 @@ public class FightState extends InWorldState{
         if(inputCoolDown <= 15){
             inputCoolDown++;
         }
+        
+		if (handler.getKeyManager().debugButton) {
+			GameSetUp.DEBUGMODE = !GameSetUp.DEBUGMODE;
+		}
+		
+		if (handler.getKeyManager().healButton && GameSetUp.DEBUGMODE == true) {
+			handler.getEntityManager().getPlayer().setHealth(handler.getEntityManager().getPlayer().getMaxHealth());
+			handler.getEntityManager().getPlayer().setMana(handler.getEntityManager().getPlayer().getMaxMana());
+		}
+		
         if (handler.getKeyManager().down || handler.getKeyManager().up) {}
         if (handler.getKeyManager().right && inputCoolDown > 15){
 //        	choose options to the right
