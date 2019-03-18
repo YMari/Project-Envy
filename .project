@@ -14,4 +14,11 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>res/Sheets/BPieFull.png</name>
+			<type>1</type>
+			<location>C:/Users/Yavier/Downloads/BPieFull.png</location>
+		</link>
+	</linkedResources>
 </projectDescription>

@@ -1,6 +1,8 @@
 package Game.World;
 
 import Game.Entities.EntityManager;
+import Game.Entities.Statics.CaveObstacle;
+import Game.Entities.Statics.LightStatue;
 import Game.Entities.Statics.SmokeHouse;
 import Game.Entities.Statics.Tree;
 import Input.MouseManager.Circle;
@@ -42,6 +44,8 @@ public class WorldManager {
 		this.entityManager.AddEntity(handler.newEnemy(Images.PEnemyIdle,handler,2400, -200,"MapState","Common Rat","None","EnemyOne",100,25,40,1,8,12,20,10,20,10,1,5,"None","Fire",null,null)); // lvl 0 dificulty
 		
 		this.entityManager.AddEntity(circle);
+		
+		this.entityManager.AddEntity(new CaveObstacle (handler, 1642, 90));
 
 		AddWalls();
 
@@ -142,6 +146,9 @@ public class WorldManager {
 		worldWalls.add(new Walls(handler, 620, 210, 80, 160, "Wall"));
 		worldWalls.add(new Walls(handler, 840, 240, 120, 110, "Wall"));
 		worldWalls.add(new Walls(handler, 580, 300, 40, 50, "Wall"));
+		
+		///Cave Obstacle
+		worldWalls.add(new Walls(handler, 1642, 90, 88, 56, "Wall"));
 	}
 
 	public void collidedWithWall() {

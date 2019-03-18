@@ -510,7 +510,7 @@ public class FightState extends InWorldState{
             public void onClick() {
                 if(handler.getEntityManager().getPlayer().getMana()>=25) {
                     System.out.println("Skill");
-                    skill = true;
+                    skill = false;
                 }
 
             }
