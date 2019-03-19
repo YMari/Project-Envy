@@ -251,7 +251,7 @@ public class Player extends BaseDynamicEntity implements Fighter {
 							GameSetUp.LOADING = true;
 							handler.setArea("Town");
 
-							handler.getGame().getMusicHandler().set_changeMusic("res/music/Cave.mp3");
+							handler.getGame().getMusicHandler().set_changeMusic("res/music/BotW - DayRiding.wav");
 							handler.getGame().getMusicHandler().play();
 							handler.getGame().getMusicHandler().setVolume(0.4);
 
