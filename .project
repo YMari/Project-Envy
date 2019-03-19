@@ -14,26 +14,4 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>res/Sheets/BPieFull.png</name>
-			<type>1</type>
-			<location>C:/Users/Yavier/Downloads/BPieFull.png</location>
-		</link>
-		<link>
-			<name>res/Sheets/Kirby1.png</name>
-			<type>1</type>
-			<location>C:/Users/Yavier/Downloads/Kirby1.png</location>
-		</link>
-		<link>
-			<name>res/Sheets/Kirby2.png</name>
-			<type>1</type>
-			<location>C:/Users/Yavier/Downloads/Kirby2.png</location>
-		</link>
-		<link>
-			<name>res/Worlds/PalletTown.png</name>
-			<type>1</type>
-			<location>C:/Users/Yavier/Downloads/PalletTown.png</location>
-		</link>
-	</linkedResources>
 </projectDescription>
