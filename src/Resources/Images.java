@@ -94,6 +94,8 @@ public class Images {
 	public static BufferedImage tree;
 	
 	public static BufferedImage BPie;
+	public static BufferedImage TownMap;
+	public static BufferedImage[] KirbyNPC;
 
 	public Images() {
 
@@ -158,8 +160,11 @@ public class Images {
 			projectTitle = ImageIO.read(getClass().getResourceAsStream("/Buttons/ProjectWord.png"));
 			ghost = ImageIO.read(getClass().getResourceAsStream("/Sheets/ghost.png"));
 
-			
+			TownMap = ImageIO.read(getClass().getResourceAsStream("/Worlds/PalletTown.png"));
 			BPie = ImageIO.read(getClass().getResourceAsStream("/Sheets/BPieFull.png"));
+			
+			KirbyNPC[0] = ImageIO.read(getClass().getResourceAsStream("/Sheets/Kirby1.png"));
+			KirbyNPC[1] = ImageIO.read(getClass().getResourceAsStream("/Sheets/Kirby2.png"));
 			
 			CaveMap = ImageIO.read(getClass().getResourceAsStream("/Worlds/CaveMap.png"));
 			tree = ImageIO.read(getClass().getResourceAsStream("/Sheets/Tree.png"));
