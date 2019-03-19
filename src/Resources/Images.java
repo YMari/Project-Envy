@@ -80,6 +80,7 @@ public class Images {
 
 	public static SpriteSheet smokeHouseSheet;
 	public static SpriteSheet statueSheet;
+//	public static SpriteSheet kirbyNPCSheet;
 
 	public static BufferedImage[] smokeHouse;
 
@@ -95,7 +96,8 @@ public class Images {
 	
 	public static BufferedImage BPie;
 	public static BufferedImage TownMap;
-	public static BufferedImage KirbyNPC;
+//	public static BufferedImage[] kirbyNPC;
+	public static BufferedImage kirbyNPC;
 	public static Image ScaledTown;
 
 	public Images() {
@@ -140,6 +142,8 @@ public class Images {
 
 		smokeHouse = new BufferedImage[7];
 		lightStatue = new BufferedImage[10];
+		
+//		kirbyNPC = new BufferedImage[2];
 
 		try {
 			
@@ -157,17 +161,19 @@ public class Images {
 
 			PEnemySheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/P-enemy.png")));
 			WEnemySheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/W-enemy.png")));
-
+			
 			projectTitle = ImageIO.read(getClass().getResourceAsStream("/Buttons/ProjectWord.png"));
 			ghost = ImageIO.read(getClass().getResourceAsStream("/Sheets/ghost.png"));
 
 			TownMap = ImageIO.read(getClass().getResourceAsStream("/Worlds/PalletTown.png"));
 			BPie = ImageIO.read(getClass().getResourceAsStream("/Sheets/BPieFull.png"));
 			
-			KirbyNPC = ImageIO.read(getClass().getResourceAsStream("/Sheets/Kirby1.png"));
-			
-//			KirbyNPC[0] = ImageIO.read(getClass().getResourceAsStream("/Sheets/Kirby1.png"));
-//			KirbyNPC[1] = ImageIO.read(getClass().getResourceAsStream("/Sheets/Kirby2.png"));
+//			kirbyNPCSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/KirbySheet.png")));
+//			kirbyNPC[0] =  kirbyNPCSheet.crop(0, 0, 28, 32);
+//			kirbyNPC[1] =  kirbyNPCSheet.crop(29, 0, 28, 32);
+//			kirbyNPC[0] =  ImageIO.read(getClass().getResourceAsStream("/Sheets/Kirby1.jpg"));
+//			kirbyNPC[1] =  ImageIO.read(getClass().getResourceAsStream("/Sheets/Kirby2.jpg"));
+			kirbyNPC = ImageIO.read(getClass().getResourceAsStream("/Sheets/Kirby1.png"));
 			
 			CaveMap = ImageIO.read(getClass().getResourceAsStream("/Worlds/CaveMap.png"));
 			tree = ImageIO.read(getClass().getResourceAsStream("/Sheets/Tree.png"));
