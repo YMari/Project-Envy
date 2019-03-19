@@ -149,6 +149,9 @@ public class WorldManager {
 		
 		///Cave Obstacle
 		worldWalls.add(new Walls(handler, 1642, 90, 88, 56, "Wall"));
+		
+		//Town Entrance
+		worldWalls.add(new Walls(handler, 1085, 420, 200, 250, "Door Town"));
 	}
 
 	public void collidedWithWall() {

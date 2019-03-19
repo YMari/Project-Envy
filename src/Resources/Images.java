@@ -95,7 +95,8 @@ public class Images {
 	
 	public static BufferedImage BPie;
 	public static BufferedImage TownMap;
-	public static BufferedImage[] KirbyNPC;
+	public static BufferedImage KirbyNPC;
+	public static Image ScaledTown;
 
 	public Images() {
 
@@ -163,8 +164,10 @@ public class Images {
 			TownMap = ImageIO.read(getClass().getResourceAsStream("/Worlds/PalletTown.png"));
 			BPie = ImageIO.read(getClass().getResourceAsStream("/Sheets/BPieFull.png"));
 			
-			KirbyNPC[0] = ImageIO.read(getClass().getResourceAsStream("/Sheets/Kirby1.png"));
-			KirbyNPC[1] = ImageIO.read(getClass().getResourceAsStream("/Sheets/Kirby2.png"));
+			KirbyNPC = ImageIO.read(getClass().getResourceAsStream("/Sheets/Kirby1.png"));
+			
+//			KirbyNPC[0] = ImageIO.read(getClass().getResourceAsStream("/Sheets/Kirby1.png"));
+//			KirbyNPC[1] = ImageIO.read(getClass().getResourceAsStream("/Sheets/Kirby2.png"));
 			
 			CaveMap = ImageIO.read(getClass().getResourceAsStream("/Worlds/CaveMap.png"));
 			tree = ImageIO.read(getClass().getResourceAsStream("/Sheets/Tree.png"));
@@ -729,6 +732,7 @@ public class Images {
 		
 		ScaledCave = Images.CaveMap.getScaledInstance(3680, 4000, Image.SCALE_SMOOTH); // 368x400 pixel image
 
+		ScaledTown = Images.TownMap.getScaledInstance(2155, 2000, Image.SCALE_SMOOTH); // 431x400  *5
 	}
 
 	
