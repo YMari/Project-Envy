@@ -36,6 +36,7 @@ public class KeyManager implements KeyListener {
 	
 	public boolean debugButton = false;
 	public boolean healButton = false;
+	public boolean interactButton = false;
 
 
 	public KeyManager(){
@@ -72,6 +73,7 @@ public class KeyManager implements KeyListener {
 		
 		debugButton = keys[KeyEvent.VK_F7];
 		healButton = keys[KeyEvent.VK_H];
+		interactButton = keys[KeyEvent.VK_E];
 
 	}
 

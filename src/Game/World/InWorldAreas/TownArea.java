@@ -7,6 +7,8 @@ import java.awt.*;
 import java.util.ArrayList;
 
 import Game.Entities.EntityManager;
+import Game.Entities.Statics.LightStatue;
+import Game.Entities.Statics.QuestEntity;
 import Game.World.Walls;
 
 public class TownArea extends BaseArea {
@@ -18,7 +20,7 @@ public class TownArea extends BaseArea {
     private int imageWidth = 2155, imageHeight = 2000;
     public final static int playerXSpawn = -380, playerYSpawn = -10;
 
-    private Rectangle background = new Rectangle(3000, 3000);
+    private Rectangle background = new Rectangle(2500, 2500);
 
     public static ArrayList<InWorldWalls> townWalls;
 
@@ -37,7 +39,8 @@ public class TownArea extends BaseArea {
 //        this.entityManager.AddEntity(handler.newEnemy(Images.PEnemyIdle,handler,700, 2000,"InWorldState","Sergio","Cave","EnemyOne",150,25,80,1,8,12,20,10,20,10,1,10,"None","Thunder",null,null)); //lvl 2 difficulty
 //        this.entityManager.AddEntity(handler.newEnemy(Images.PEnemyIdle,handler,3000, 1000,"InWorldState","Cave Dweller","Cave","EnemyOne",100,25,60,10,1,12,20,10,20,13,1,10,"None","Thunder",null,null)); // lvl 1 difficulty
 
-//        this.entityManager.AddEntity(new LightStatue (handler, 2080, 1770));
+//        this.entityManager.AddEntity(new LightStatue (handler, 925, 0));
+        this.entityManager.AddEntity(new QuestEntity (handler, 1450, 1300));
         
         townWalls = new ArrayList<>();
         AddWalls();
@@ -66,7 +69,6 @@ public class TownArea extends BaseArea {
         g2.setColor(Color.black);
         g2.fill(background);
 
-//        gotta do the same but for "scaled town"
         g.drawImage(Images.ScaledTown, handler.getXInWorldDisplacement(), handler.getYInWorldDisplacement(), null);
 
         if (GameSetUp.DEBUGMODE) {
@@ -112,6 +114,10 @@ public class TownArea extends BaseArea {
     	
     	// Exit
     	townWalls.add(new InWorldWalls(handler, 925, 0, 300, 180, "Exit"));
+    	
+    	// QuestEntity Wall
+    	townWalls.add(new InWorldWalls(handler, 1450, 1300, 28*5, 32*5, "Wall"));
+    	townWalls.add(new InWorldWalls(handler, 1425, 1275, 28*5 + 50, 32*5 + 50, "Quest"));
 
 
     }

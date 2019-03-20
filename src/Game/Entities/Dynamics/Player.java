@@ -1,5 +1,7 @@
 package Game.Entities.Dynamics;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -105,6 +107,28 @@ public class Player extends BaseDynamicEntity implements Fighter {
 		if (GameSetUp.DEBUGMODE) {
 			g2.draw(nextArea);
 			g2.draw(getCollision());
+		}
+		
+		if (TownArea.isInTown) {
+			for (InWorldWalls iw : TownArea.townWalls) {
+				g2.setFont(new Font("TimesRoman", Font.BOLD, 35));
+				g2.setColor(Color.BLACK);
+				if (nextArea.intersects(iw)) {
+					g2.drawString("E", (int) xPosition + 20, (int) yPosition - 20);
+					if (handler.getKeyManager().interactButton) {
+						Rectangle textBox = new Rectangle((int)xPosition - 80, (int)yPosition + 150, 500, 150);
+						g2.setColor(Color.BLACK);
+						g2.fill(textBox);
+						
+						g2.setColor(Color.WHITE);
+						g2.setFont(new Font("TimesRoman", Font.BOLD, 26));
+						g2.drawString("POYO POYO POYO!", (int)xPosition - 65, (int)yPosition + 180);
+						g2.drawString("(Kill Jovan for me and I'll teach you ", (int)xPosition - 65, (int)yPosition + 210);
+						g2.drawString("how to eat that pie outside)", (int)xPosition - 65, (int)yPosition + 240);
+						
+					}
+				}
+			}
 		}
 	}
 
@@ -324,6 +348,13 @@ public class Player extends BaseDynamicEntity implements Fighter {
 								checkInWorld = false;
 								System.out.println("Left Town");
 								setWidthAndHeight(InMapWidthFrontAndBack, InMapHeightFront);
+							}
+							
+							else if (iw.getType().equals("Quest")) {
+								if (handler.getKeyManager().interactButton) {
+									// dunno if will be used, check render
+								}
+								
 							}
 						}
 					}
