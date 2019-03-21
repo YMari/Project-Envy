@@ -1,10 +1,13 @@
 package Game.World;
 
+import Game.Entities.BaseEntity;
 import Game.Entities.EntityManager;
+import Game.Entities.Dynamics.EnemyOne;
 import Game.Entities.Statics.CaveObstacle;
 import Game.Entities.Statics.LightStatue;
 import Game.Entities.Statics.SmokeHouse;
 import Game.Entities.Statics.Tree;
+import Game.GameStates.State;
 import Input.MouseManager.Circle;
 import Main.GameSetUp;
 import Main.Handler;
@@ -24,6 +27,8 @@ public class WorldManager {
 	private int xPos;
 	private int yPos;
 	String alphabet1 = " abcdefghijklmnopqrstuvwxyzabcd";
+	
+	public boolean questComplete = false;
 
 	ArrayList<Game.World.Walls> worldWalls;
 
@@ -59,7 +64,7 @@ public class WorldManager {
 		this.animation.tick();
 		this.collidedWithWall();
 		this.moveString();
-
+		QuestComplete();
 	}
 
 	public void render(Graphics g) {
@@ -91,6 +96,22 @@ public class WorldManager {
 		}
 	}
 
+	public void QuestComplete() {
+//		if (handler.newEnemy(Images.PEnemyIdle,handler,500, 800,"MapState","Jovan","None","EnemyOne",100,25,40,1,8,12,20,10,20,10,1,5,"None","Fire",null,null).isDead() == true) {
+//			System.out.println("quest"); // this doesn't work :(
+//			questComplete = true;
+//		}
+		for(BaseEntity enemy : handler.getEntityManager().getEntities()) {
+			if(enemy instanceof EnemyOne) {
+				if(((EnemyOne)enemy).name.equals("Jovan")) {
+					if (((EnemyOne)enemy).isDead() == true){
+						questComplete = true;
+					}
+				}
+			}
+		}
+	}
+	
 	// adds all the walls in game
 	private void AddWalls() {
 		worldWalls = new ArrayList<>();

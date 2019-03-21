@@ -16,6 +16,9 @@ public class EntityManager {
 	
 	ArrayList<BaseEntity> entities;
 	
+	 public ArrayList<BaseEntity> getEntities() {
+		 return entities;
+	 }
 	public EntityManager(Handler handler, Player player) {
 		this.handler = handler;
 		this.player = player;

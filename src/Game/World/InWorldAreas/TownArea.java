@@ -7,8 +7,8 @@ import java.awt.*;
 import java.util.ArrayList;
 
 import Game.Entities.EntityManager;
+import Game.Entities.Dynamics.DynamicQuestNPC;
 import Game.Entities.Statics.LightStatue;
-import Game.Entities.Statics.QuestEntity;
 import Game.World.Walls;
 
 public class TownArea extends BaseArea {
@@ -40,7 +40,8 @@ public class TownArea extends BaseArea {
 //        this.entityManager.AddEntity(handler.newEnemy(Images.PEnemyIdle,handler,3000, 1000,"InWorldState","Cave Dweller","Cave","EnemyOne",100,25,60,10,1,12,20,10,20,13,1,10,"None","Thunder",null,null)); // lvl 1 difficulty
 
 //        this.entityManager.AddEntity(new LightStatue (handler, 925, 0));
-        this.entityManager.AddEntity(new QuestEntity (handler, 1450, 1300));
+//        this.entityManager.AddEntity(new QuestEntity (handler, 1450, 1300));
+        this.entityManager.AddEntity(new DynamicQuestNPC(handler, 1450, 1300, null));
         
         townWalls = new ArrayList<>();
         AddWalls();
