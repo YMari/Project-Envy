@@ -99,6 +99,10 @@ public class Images {
 	public static BufferedImage[] kirbyNPC;
 //	public static BufferedImage kirbyNPC;
 	public static Image ScaledTown;
+	public static Image TextBox;
+	public static Image ScaledTextBox;
+	public static Image EKey;
+	public static Image ScaledEKey;
 
 	public Images() {
 
@@ -167,13 +171,11 @@ public class Images {
 
 			TownMap = ImageIO.read(getClass().getResourceAsStream("/Worlds/PalletTown.png"));
 			BPie = ImageIO.read(getClass().getResourceAsStream("/Sheets/BPieFull.png"));
+			TextBox = ImageIO.read(getClass().getResourceAsStream("/Sheets/PokeTextBox.png"));
+			EKey = ImageIO.read(getClass().getResourceAsStream("/Sheets/KeyImageE.png"));
 			
-//			kirbyNPCSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/KirbySheet.png")));
-//			kirbyNPC[0] =  kirbyNPCSheet.crop(0, 0, 28, 32);
-//			kirbyNPC[1] =  kirbyNPCSheet.crop(29, 0, 28, 32);
 			kirbyNPC[0] =  ImageIO.read(getClass().getResourceAsStream("/Sheets/Kirby1.png"));
 			kirbyNPC[1] =  ImageIO.read(getClass().getResourceAsStream("/Sheets/Kirby2.png"));
-//			kirbyNPC = ImageIO.read(getClass().getResourceAsStream("/Sheets/Kirby1.png"));
 			
 			CaveMap = ImageIO.read(getClass().getResourceAsStream("/Worlds/CaveMap.png"));
 			tree = ImageIO.read(getClass().getResourceAsStream("/Sheets/Tree.png"));
@@ -738,7 +740,9 @@ public class Images {
 		
 		ScaledCave = Images.CaveMap.getScaledInstance(3680, 4000, Image.SCALE_SMOOTH); // 368x400 pixel image
 
-		ScaledTown = Images.TownMap.getScaledInstance(2155, 2000, Image.SCALE_SMOOTH); // 431x400  *5
+		ScaledTown = Images.TownMap.getScaledInstance(2155, 2000, Image.SCALE_SMOOTH); // 431x400 *5
+		ScaledTextBox = Images.TextBox.getScaledInstance(1008, 184, Image.SCALE_SMOOTH); //252x46 *4
+		ScaledEKey = Images.EKey.getScaledInstance(50, 50, Image.SCALE_SMOOTH); //157x155
 	}
 
 	

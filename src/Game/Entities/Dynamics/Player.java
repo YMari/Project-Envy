@@ -113,45 +113,32 @@ public class Player extends BaseDynamicEntity implements Fighter {
 		
 		if (TownArea.isInTown) {
 			for (InWorldWalls iw : TownArea.townWalls) {
-				g2.setFont(new Font("TimesRoman", Font.BOLD, 35));
+				g2.setFont(new Font("Arial", Font.BOLD, 26));
 				g2.setColor(Color.BLACK);
 				if (nextArea.intersects(iw)) {
-					g2.drawString("E", (int) xPosition + 20, (int) yPosition - 20);
-					if (handler.getKeyManager().interactButton) {
-						if (questGiven == true && handler.getWorldManager().questComplete == true) {
-							Rectangle textBox = new Rectangle((int)xPosition - 80, (int)yPosition + 150, 500, 150);
-							g2.setColor(Color.BLACK);
-							g2.fill(textBox);
+					if ((iw.getType().equals("Quest"))) {
+						g2.drawImage(Images.ScaledEKey, (int) xPosition + 5, (int) yPosition - 75, null);
+						
+						if (handler.getKeyManager().interactButton) {
+							if (questGiven == true && handler.getWorldManager().questComplete == true) {
+								g2.drawImage(Images.ScaledTextBox, (int)xPosition - 400, (int)yPosition + 180, null);
+								g2.drawString("POYO POYO POYO! POYO POYO!", (int)xPosition - 350, (int)yPosition + 240);
+								g2.drawString("(GOOD JOB! Take this skill and go eat that pie!)", (int)xPosition - 350, (int)yPosition + 270);
+							}
 
-							g2.setColor(Color.WHITE);
-							g2.setFont(new Font("TimesRoman", Font.BOLD, 26));
-							g2.drawString("POYO POYO POYO! POYO POYO!", (int)xPosition - 65, (int)yPosition + 180);
-							g2.drawString("(GOOD JOB! Take this skill ", (int)xPosition - 65, (int)yPosition + 210);
-							g2.drawString("and go eat that pie!)", (int)xPosition - 65, (int)yPosition + 240);
-						}
-
-						else {
-							questGiven = true;
-							System.out.println("given");
-							Rectangle textBox = new Rectangle((int)xPosition - 80, (int)yPosition + 150, 500, 150);
-							g2.setColor(Color.BLACK);
-							g2.fill(textBox);
-
-							g2.setColor(Color.WHITE);
-							g2.setFont(new Font("TimesRoman", Font.BOLD, 26));
-							g2.drawString("POYO POYO POYO!", (int)xPosition - 65, (int)yPosition + 180);
-							g2.drawString("(Kill Jovan for me and I'll teach you ", (int)xPosition - 65, (int)yPosition + 210);
-							g2.drawString("how to eat that pie outside.)", (int)xPosition - 65, (int)yPosition + 240);
-
+							else {
+								questGiven = true;
+								g2.drawImage(Images.ScaledTextBox, (int)xPosition - 400, (int)yPosition + 180, null);
+								g2.drawString("POYO POYO POYO!", (int)xPosition - 350, (int)yPosition + 240);
+								g2.drawString("(Kill Jovan for me and I'll teach you how to eat that pie outside.)", (int)xPosition - 350, (int)yPosition + 270);
+							}
 						}
 					}
-					
-
 				}
 			}
 		}
 	}
-	
+
 	
 	
 	private void UpdateNextMove() {
