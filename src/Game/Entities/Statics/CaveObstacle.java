@@ -28,9 +28,13 @@ public class CaveObstacle extends BaseStaticEntity {
 
 	@Override
 	public void render(Graphics g) {
-		g.drawImage(Images.BPie, (int)(handler.getXDisplacement() + xPosition),(int)( handler.getYDisplacement() + yPosition), width, height, null);
-		collision = new Rectangle((int)(handler.getXDisplacement() + xPosition + 35), (int)(handler.getYDisplacement() + yPosition + 50), width/4, height/2);
+		if (handler.getWorldManager().removeObstacle == false) {
+			g.drawImage(Images.BPie, (int)(handler.getXDisplacement() + xPosition),(int)( handler.getYDisplacement() + yPosition), width, height, null);
+			collision = new Rectangle((int)(handler.getXDisplacement() + xPosition + 35), (int)(handler.getYDisplacement() + yPosition + 50), width/4, height/2);
 		}
+		else {
+		}
+	}
 
 	@Override
 	public Rectangle getCollision() {

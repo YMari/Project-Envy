@@ -157,6 +157,7 @@ public class FightState extends InWorldState{
         }
 
         this.moveFightString();
+//        skillUpdate();
 
 
 
@@ -481,7 +482,15 @@ public class FightState extends InWorldState{
 
         eWait = System.currentTimeMillis() + 3500;
     }
-
+    
+//    private void skillUpdate() {
+//        if (handler.getWorldManager().questCompleted == true) {
+//        	skill = true;
+//        	handler.getEntityManager().getPlayer().skillAcquired = true;
+//        	handler.getEntityManager().getPlayer().setSkill("Devour");
+//        }
+//    }
+    
     private void setUiManager() {
         uiManager = new UIManager(handler);
 
@@ -508,10 +517,10 @@ public class FightState extends InWorldState{
         uiManager.addObjects(new UIImageButton(handler.getWidth() * 38/60 - 128/2, 5*handler.getHeight()/6, 128, 64, Images.Skill, new ClickListlener() {
             @Override
             public void onClick() {
-                if(handler.getEntityManager().getPlayer().getMana()>=25) {
-                    System.out.println("Skill");
-                    skill = false;
-                }
+            	if(handler.getEntityManager().getPlayer().getMana()>=25) {
+            		System.out.println("Skill");
+            		skill = handler.getEntityManager().getPlayer().skillAcquired;
+            	}
 
             }
         }));

@@ -28,7 +28,9 @@ public class WorldManager {
 	private int yPos;
 	String alphabet1 = " abcdefghijklmnopqrstuvwxyzabcd";
 	
-	public boolean questComplete = false;
+	public boolean questKill = false;
+	public boolean questCompleted = false;
+	public boolean removeObstacle = false;
 
 	ArrayList<Game.World.Walls> worldWalls;
 
@@ -51,6 +53,15 @@ public class WorldManager {
 		this.entityManager.AddEntity(circle);
 		
 		this.entityManager.AddEntity(new CaveObstacle (handler, 1642, 90));
+
+//		if (questComplete == true) {
+//			for(BaseEntity obstacle : handler.getEntityManager().getEntities()) {
+//				if (obstacle instanceof CaveObstacle) {
+////					handler.getEntityManager().RemoveEntity((CaveObstacle)obstacle);	
+//					handler.getEntityManager().getEntities().remove(obstacle);	
+//				}
+//			}
+//		}
 
 		AddWalls();
 
@@ -97,19 +108,41 @@ public class WorldManager {
 	}
 
 	public void QuestComplete() {
-//		if (handler.newEnemy(Images.PEnemyIdle,handler,500, 800,"MapState","Jovan","None","EnemyOne",100,25,40,1,8,12,20,10,20,10,1,5,"None","Fire",null,null).isDead() == true) {
-//			System.out.println("quest"); // this doesn't work :(
-//			questComplete = true;
-//		}
 		for(BaseEntity enemy : handler.getEntityManager().getEntities()) {
 			if(enemy instanceof EnemyOne) {
 				if(((EnemyOne)enemy).name.equals("Jovan")) {
 					if (((EnemyOne)enemy).isDead() == true){
-						questComplete = true;
+						questKill = true;
 					}
 				}
 			}
 		}
+		
+		
+//		if (questCompleted == true) {
+//			for(BaseEntity obstacle : handler.getEntityManager().getEntities()) {
+//				if (obstacle instanceof CaveObstacle) {
+//					handler.getEntityManager().RemoveEntity((CaveObstacle)obstacle);	
+//				}
+//			}
+//		}
+		
+//		if (questCompleted == true) {
+//			for(BaseEntity obstacle : handler.getEntityManager().getEntities()) {
+//				if (obstacle instanceof CaveObstacle) {
+////					handler.getEntityManager().RemoveEntity((CaveObstacle)obstacle);	
+//					handler.getEntityManager().getEntities().remove((CaveObstacle)obstacle);	
+//				}
+//			}
+//		}
+		
+//		if (questCompleted == true) {
+//		for(BaseEntity obstacle : handler.getEntityManager().getEntities()) {
+//			if (obstacle instanceof CaveObstacle) {
+//				handler.getEntityManager().RemoveEntity(obstacle);	
+//			}
+//		}
+//	}
 	}
 	
 	// adds all the walls in game
@@ -169,7 +202,8 @@ public class WorldManager {
 		worldWalls.add(new Walls(handler, 580, 300, 40, 50, "Wall"));
 		
 		///Cave Obstacle
-		worldWalls.add(new Walls(handler, 1642, 90, 88, 56, "Wall"));
+		worldWalls.add(new Walls(handler, 1642, 90, 88, 56, "Obstacle"));   //obstacle
+		worldWalls.add(new Walls(handler, 1492, -60, 400, 375, "Quest Detection"));   //obstacle radius for quest detection
 		
 		//Town Entrance
 		worldWalls.add(new Walls(handler, 1085, 420, 200, 250, "Door Town"));

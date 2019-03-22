@@ -6,6 +6,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
+import Game.Entities.BaseEntity;
+import Game.Entities.Statics.CaveObstacle;
 import Game.GameStates.InWorldState;
 import Game.GameStates.State;
 import Game.World.Walls;
@@ -41,6 +43,7 @@ public class Player extends BaseDynamicEntity implements Fighter {
 	private int animWalkingSpeed = 150;
 	
 	public boolean questGiven = false;
+	public boolean skillAcquired = false;
 
 	public Player(Handler handler, int xPosition, int yPosition) {
 		super(handler, yPosition, yPosition, null);
@@ -113,24 +116,29 @@ public class Player extends BaseDynamicEntity implements Fighter {
 		
 		if (TownArea.isInTown) {
 			for (InWorldWalls iw : TownArea.townWalls) {
-				g2.setFont(new Font("Arial", Font.BOLD, 26));
+				g2.setFont(new Font("Arial", Font.BOLD, 22));
 				g2.setColor(Color.BLACK);
 				if (nextArea.intersects(iw)) {
 					if ((iw.getType().equals("Quest"))) {
 						g2.drawImage(Images.ScaledEKey, (int) xPosition + 5, (int) yPosition - 75, null);
 						
 						if (handler.getKeyManager().interactButton) {
-							if (questGiven == true && handler.getWorldManager().questComplete == true) {
-								g2.drawImage(Images.ScaledTextBox, (int)xPosition - 400, (int)yPosition + 180, null);
-								g2.drawString("POYO POYO POYO! POYO POYO!", (int)xPosition - 350, (int)yPosition + 240);
-								g2.drawString("(GOOD JOB! Take this skill and go eat that pie!)", (int)xPosition - 350, (int)yPosition + 270);
+							if (questGiven == true && handler.getWorldManager().questKill == true) {
+								handler.getWorldManager().questCompleted = true;
+								setSkill("Devour");
+								skillAcquired = true;
+								g2.drawImage(Images.ScaledTextBox, (int)xPosition - 500, (int)yPosition + 180, null);
+								g2.drawString("POYO POYO POYO!", (int)xPosition - 450, (int)yPosition + 240);
+								g2.drawString("(Kill Jovan for me and I'll teach you how to eat that pie outside.)", (int)xPosition - 450, (int)yPosition + 270);
+								g2.drawString("POYO POYO POYO! POYO POYO!", (int)xPosition - 450, (int)yPosition + 300);
+								g2.drawString("(OH! You did it! Take this skill and go eat that pie!)                    (Skill Acquired: Devour)", (int)xPosition - 450, (int)yPosition + 330);
 							}
 
 							else {
 								questGiven = true;
-								g2.drawImage(Images.ScaledTextBox, (int)xPosition - 400, (int)yPosition + 180, null);
-								g2.drawString("POYO POYO POYO!", (int)xPosition - 350, (int)yPosition + 240);
-								g2.drawString("(Kill Jovan for me and I'll teach you how to eat that pie outside.)", (int)xPosition - 350, (int)yPosition + 270);
+								g2.drawImage(Images.ScaledTextBox, (int)xPosition - 500, (int)yPosition + 180, null);
+								g2.drawString("POYO POYO POYO!", (int)xPosition - 450, (int)yPosition + 240);
+								g2.drawString("(Kill Jovan for me and I'll teach you how to eat that pie outside.)", (int)xPosition - 450, (int)yPosition + 270);
 							}
 						}
 					}
@@ -240,7 +248,13 @@ public class Player extends BaseDynamicEntity implements Fighter {
 					if (w.getType().equals("Wall")) {
 						PushPlayerBack();
 					}
-
+					else if (w.getType().equals("Obstacle")) {
+						if (skillAcquired == false) {
+							PushPlayerBack();
+						}
+						else {}
+					}
+					
 					else if (w.getType().startsWith("Door")) {
 						canMove = true;
 
@@ -289,6 +303,11 @@ public class Player extends BaseDynamicEntity implements Fighter {
 							handler.getGame().getMusicHandler().setVolume(0.4);
 
 							State.setState(handler.getGame().inWorldState.setArea(InWorldState.townArea));
+						}
+					}
+					else if (w.getType().startsWith("Quest Detection")) {
+						if (skillAcquired == true) {
+							handler.getWorldManager().removeObstacle = true;
 						}
 					}
 
@@ -481,7 +500,7 @@ public class Player extends BaseDynamicEntity implements Fighter {
 	double health = 200, mana = 100, xp = 0, lvl = 1, defense = 16, str = 10, intl = 25, mr = 12, cons = 20, acc = 12, evs = 4,
 			initiative = 13, maxHealth = 200, maxMana = 100, lvlUpExp = 200;
 
-	String Class = "none", skill = "Freeze";
+	String Class = "none", skill = "None";
 	String[] buffs = {}, debuffs = {};
 
 	@Override

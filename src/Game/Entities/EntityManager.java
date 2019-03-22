@@ -10,24 +10,23 @@ import Main.GameSetUp;
 import Main.Handler;
 
 public class EntityManager {
-	
+
 	protected Handler handler;
 	protected Player player;
-	
+
 	ArrayList<BaseEntity> entities;
+
+
 	
-	 public ArrayList<BaseEntity> getEntities() {
-		 return entities;
-	 }
 	public EntityManager(Handler handler, Player player) {
 		this.handler = handler;
 		this.player = player;
-		
+
 		entities = new ArrayList<>();
 	}
-	
+
 	public void tick() {
-		
+
 		for (BaseEntity e : entities) {
 			if(e instanceof  BaseHostileEntity){
 				if(!((BaseHostileEntity) e).isDead()) {
@@ -41,32 +40,32 @@ public class EntityManager {
 				e.tick();
 			}
 		}
-		
+
 		player.tick();
-		
+
 	}
-	
-	
+
+
 	private void CheckCollisions(BaseEntity e) {
-		
+
 		if ( player.getCollision().intersects(e.getCollision())&&!GameSetUp.SWITCHING) {
-			
+
 			if (e instanceof BaseStaticEntity){
 				player.WallBoundary(e.getXOffset());
 			}
 
 		}
-		
-		
-		
+
+
+
 		// Make it so it checks if ALL Dynamic entities INTERSECTED with ALL STATIC entities ?
-		
+
 	}
 
 	public void render(Graphics g){
-		
+
 		player.render(g);
-		
+
 		for (BaseEntity e : entities) {
 			if(e instanceof BaseHostileEntity) {
 				if(!((BaseHostileEntity) e).isDead()) e.render(g);
@@ -77,8 +76,8 @@ public class EntityManager {
 		}
 
 	}
-	
-	
+
+
 	public void AddEntity(BaseEntity e) {
 		entities.add(e);
 	}
@@ -90,5 +89,9 @@ public class EntityManager {
 
 	public Player getPlayer() {
 		return player;
+	}
+	
+	public ArrayList<BaseEntity> getEntities() {
+		return entities;
 	}
 }
