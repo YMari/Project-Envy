@@ -27,7 +27,7 @@ public class WorldManager {
 	private int xPos;
 	private int yPos;
 	String alphabet1 = " abcdefghijklmnopqrstuvwxyzabcd";
-	
+
 	public boolean questKill = false;
 	public boolean questCompleted = false;
 	public boolean removeObstacle = false;
@@ -49,19 +49,19 @@ public class WorldManager {
 		this.entityManager.AddEntity(handler.newEnemy(Images.PEnemyIdle,handler,500, 800,"MapState","Jovan","None","EnemyOne",100,25,40,1,8,12,20,10,20,10,1,5,"None","Fire",null,null)); // lvl 0 dificulty
 		this.entityManager.AddEntity(handler.newEnemy(Images.PEnemyIdle,handler,1400, 600,"MapState","Common Rat","None","EnemyOne",100,25,40,1,8,12,20,10,20,10,1,5,"None","Fire",null,null)); // lvl 0 dificulty
 		this.entityManager.AddEntity(handler.newEnemy(Images.PEnemyIdle,handler,2400, -200,"MapState","Common Rat","None","EnemyOne",100,25,40,1,8,12,20,10,20,10,1,5,"None","Fire",null,null)); // lvl 0 dificulty
-		
+
 		this.entityManager.AddEntity(circle);
-		
+
 		this.entityManager.AddEntity(new CaveObstacle (handler, 1642, 90));
 
-//		if (questComplete == true) {
-//			for(BaseEntity obstacle : handler.getEntityManager().getEntities()) {
-//				if (obstacle instanceof CaveObstacle) {
-////					handler.getEntityManager().RemoveEntity((CaveObstacle)obstacle);	
-//					handler.getEntityManager().getEntities().remove(obstacle);	
-//				}
-//			}
-//		}
+		//		if (questComplete == true) {
+		//			for(BaseEntity obstacle : handler.getEntityManager().getEntities()) {
+		//				if (obstacle instanceof CaveObstacle) {
+		////					handler.getEntityManager().RemoveEntity((CaveObstacle)obstacle);	
+		//					handler.getEntityManager().getEntities().remove(obstacle);	
+		//				}
+		//			}
+		//		}
 
 		AddWalls();
 
@@ -81,12 +81,12 @@ public class WorldManager {
 	public void render(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 		if(!this.handler.getEntityManager().getPlayer().getWeaken()) {
-		g2.drawImage(this.animation.getCurrentFrame(),
-		3027 + handler.getXDisplacement(), 3875 + 
-		handler.getYDisplacement(), 30, 30, null);}
+			g2.drawImage(this.animation.getCurrentFrame(),
+					3027 + handler.getXDisplacement(), 3875 + 
+					handler.getYDisplacement(), 30, 30, null);}
 		rectangle = new Rectangle( 3027 + 
-		handler.getXDisplacement(), 3875 + 
-		handler.getYDisplacement(), 30, 30);
+				handler.getXDisplacement(), 3875 + 
+				handler.getYDisplacement(), 30, 30);
 		g2.setColor(Color.ORANGE);
 		g2.setFont(new Font("AR ESSENCE", Font.PLAIN, 100));
 		g2.drawString(this.getString(), this.xPos,this.yPos);
@@ -117,34 +117,34 @@ public class WorldManager {
 				}
 			}
 		}
-		
-		
-//		if (questCompleted == true) {
-//			for(BaseEntity obstacle : handler.getEntityManager().getEntities()) {
-//				if (obstacle instanceof CaveObstacle) {
-//					handler.getEntityManager().RemoveEntity((CaveObstacle)obstacle);	
-//				}
-//			}
-//		}
-		
-//		if (questCompleted == true) {
-//			for(BaseEntity obstacle : handler.getEntityManager().getEntities()) {
-//				if (obstacle instanceof CaveObstacle) {
-////					handler.getEntityManager().RemoveEntity((CaveObstacle)obstacle);	
-//					handler.getEntityManager().getEntities().remove((CaveObstacle)obstacle);	
-//				}
-//			}
-//		}
-		
-//		if (questCompleted == true) {
-//		for(BaseEntity obstacle : handler.getEntityManager().getEntities()) {
-//			if (obstacle instanceof CaveObstacle) {
-//				handler.getEntityManager().RemoveEntity(obstacle);	
-//			}
-//		}
-//	}
+
+
+		//		if (questCompleted == true) {
+		//			for(BaseEntity obstacle : handler.getEntityManager().getEntities()) {
+		//				if (obstacle instanceof CaveObstacle) {
+		//					handler.getEntityManager().RemoveEntity((CaveObstacle)obstacle);	
+		//				}
+		//			}
+		//		}
+
+		//		if (questCompleted == true) {
+		//			for(BaseEntity obstacle : handler.getEntityManager().getEntities()) {
+		//				if (obstacle instanceof CaveObstacle) {
+		////					handler.getEntityManager().RemoveEntity((CaveObstacle)obstacle);	
+		//					handler.getEntityManager().getEntities().remove((CaveObstacle)obstacle);	
+		//				}
+		//			}
+		//		}
+
+		//		if (questCompleted == true) {
+		//		for(BaseEntity obstacle : handler.getEntityManager().getEntities()) {
+		//			if (obstacle instanceof CaveObstacle) {
+		//				handler.getEntityManager().RemoveEntity(obstacle);	
+		//			}
+		//		}
+		//	}
 	}
-	
+
 	// adds all the walls in game
 	private void AddWalls() {
 		worldWalls = new ArrayList<>();
@@ -200,21 +200,21 @@ public class WorldManager {
 		worldWalls.add(new Walls(handler, 620, 210, 80, 160, "Wall"));
 		worldWalls.add(new Walls(handler, 840, 240, 120, 110, "Wall"));
 		worldWalls.add(new Walls(handler, 580, 300, 40, 50, "Wall"));
-		
+
 		///Cave Obstacle
 		worldWalls.add(new Walls(handler, 1642, 90, 88, 56, "Obstacle"));   //obstacle
 		worldWalls.add(new Walls(handler, 1492, -60, 400, 375, "Quest Detection"));   //obstacle radius for quest detection
-		
+
 		//Town Entrance
 		worldWalls.add(new Walls(handler, 1085, 420, 200, 250, "Door Town"));
 	}
 
 	public void collidedWithWall() {
 		if(this.handler.getEntityManager().getPlayer().getCollision().intersects(this.rectangle)) {
-		if(!handler.getGame().getMusicHandler().getEPlayer().isEmpty()&&!handler.getGame().getMusicHandler().getEffect(0).equals(null)) {
-		handler.getGame().getMusicHandler().stopEffect(0);}    	
-		handler.getGame().getMusicHandler().playEffect("res/music/SSAcquired.wav",1);
-		handler.getEntityManager().getPlayer().setWeaken(true);
+			if(!handler.getGame().getMusicHandler().getEPlayer().isEmpty()&&!handler.getGame().getMusicHandler().getEffect(0).equals(null)) {
+				handler.getGame().getMusicHandler().stopEffect(0);}    	
+			handler.getGame().getMusicHandler().playEffect("res/music/SSAcquired.wav",1);
+			handler.getEntityManager().getPlayer().setWeaken(true);
 		}
 	}
 	public void moveString() {

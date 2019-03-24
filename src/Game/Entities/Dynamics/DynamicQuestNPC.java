@@ -1,6 +1,7 @@
 package Game.Entities.Dynamics;
 
 import Game.Entities.BaseEntity;
+import Game.World.InWorldAreas.TownArea;
 import Main.Handler;
 import Resources.Animation;
 import Resources.Images;
@@ -34,7 +35,9 @@ public class DynamicQuestNPC extends BaseDynamicEntity {
 	
 	@Override
 	public void render(Graphics g) {
+		if (TownArea.isInTown == true) {
 		g.drawImage(blink.getCurrentFrame(), (int)(handler.getXInWorldDisplacement() + xPosition),(int)( handler.getYInWorldDisplacement() + yPosition), width, height, null);
+		}
 	}
 
 	@Override
