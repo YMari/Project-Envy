@@ -41,9 +41,12 @@ public class Player extends BaseDynamicEntity implements Fighter {
 	// Animations
 	private Animation animDown, animUp, animLeft, animRight;
 	private int animWalkingSpeed = 150;
-	
+
 	public boolean questGiven = false;
 	public boolean skillAcquired = false;
+	public boolean currentlyTalking = false;
+	public boolean inputCooldown = false;
+	public int inputCooldownTimer = 0;
 
 	public Player(Handler handler, int xPosition, int yPosition) {
 		super(handler, yPosition, yPosition, null);
@@ -62,7 +65,7 @@ public class Player extends BaseDynamicEntity implements Fighter {
 		speed = 15;
 		player = new Rectangle();
 		checkInWorld = false;
-		
+
 
 	}
 
@@ -80,6 +83,7 @@ public class Player extends BaseDynamicEntity implements Fighter {
 			UpdateNextMove();
 			PlayerInput();
 
+
 			if (GameSetUp.SWITCHING) {
 				switchingCoolDown++;
 			}
@@ -94,26 +98,20 @@ public class Player extends BaseDynamicEntity implements Fighter {
 			} else {
 				checkInWorld = false;
 			}
+			
+			if (inputCooldown) {
+				inputCooldownTimer++;
+			}
+			if (inputCooldownTimer >= 10) {
+				inputCooldown = false;
+				inputCooldownTimer = 0;
+			}
 
 		}
 	}
 
-	@Override
-	public void render(Graphics g) {
+	public void TextBoxRender(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
-
-		g.drawImage(
-				getCurrentAnimationFrame(animDown, animUp, animLeft, animRight, Images.player_front, Images.player_back,
-						Images.player_left, Images.player_right),
-				(int) xPosition, (int) yPosition, currentWidth, currentHeight, null);
-
-		player = new Rectangle((int) xPosition, (int) yPosition+(currentHeight/2)+5, currentWidth-3, currentHeight/2);
-
-		if (GameSetUp.DEBUGMODE) {
-			g2.draw(nextArea);
-			g2.draw(getCollision());
-		}
-		
 		if (TownArea.isInTown) {
 			for (InWorldWalls iw : TownArea.townWalls) {
 				g2.setFont(new Font("Arial", Font.BOLD, 22));
@@ -121,8 +119,13 @@ public class Player extends BaseDynamicEntity implements Fighter {
 				if (nextArea.intersects(iw)) {
 					if ((iw.getType().equals("Quest"))) {
 						g2.drawImage(Images.ScaledEKey, (int) xPosition + 5, (int) yPosition - 75, null);
-						
-						if (handler.getKeyManager().interactButton) {
+
+						if (handler.getKeyManager().interactButton && inputCooldown == false) {
+							currentlyTalking = !currentlyTalking;
+							inputCooldown = true;
+						}
+
+						if (currentlyTalking == true) {
 							if (questGiven == true && handler.getWorldManager().questKill == true) {
 								handler.getWorldManager().questCompleted = true;
 								setSkill("Devour");
@@ -147,8 +150,59 @@ public class Player extends BaseDynamicEntity implements Fighter {
 		}
 	}
 
-	
-	
+	@Override
+	public void render(Graphics g) {
+		Graphics2D g2 = (Graphics2D) g;
+
+		g.drawImage(
+				getCurrentAnimationFrame(animDown, animUp, animLeft, animRight, Images.player_front, Images.player_back,
+						Images.player_left, Images.player_right),
+				(int) xPosition, (int) yPosition, currentWidth, currentHeight, null);
+
+		player = new Rectangle((int) xPosition, (int) yPosition+(currentHeight/2)+5, currentWidth-3, currentHeight/2);
+
+		if (GameSetUp.DEBUGMODE) {
+			g2.draw(nextArea);
+			g2.draw(getCollision());
+		}
+
+		TextBoxRender(g2);
+
+		//		if (TownArea.isInTown) {
+		//			for (InWorldWalls iw : TownArea.townWalls) {
+		//				g2.setFont(new Font("Arial", Font.BOLD, 22));
+		//				g2.setColor(Color.BLACK);
+		//				if (nextArea.intersects(iw)) {
+		//					if ((iw.getType().equals("Quest"))) {
+		//						g2.drawImage(Images.ScaledEKey, (int) xPosition + 5, (int) yPosition - 75, null);
+		//						
+		//						if (handler.getKeyManager().interactButton) {
+		//							if (questGiven == true && handler.getWorldManager().questKill == true) {
+		//								handler.getWorldManager().questCompleted = true;
+		//								setSkill("Devour");
+		//								skillAcquired = true;
+		//								g2.drawImage(Images.ScaledTextBox, (int)xPosition - 500, (int)yPosition + 180, null);
+		//								g2.drawString("POYO POYO POYO!", (int)xPosition - 450, (int)yPosition + 240);
+		//								g2.drawString("(Kill Jovan for me and I'll teach you how to eat that pie outside.)", (int)xPosition - 450, (int)yPosition + 270);
+		//								g2.drawString("POYO POYO POYO! POYO POYO!", (int)xPosition - 450, (int)yPosition + 300);
+		//								g2.drawString("(OH! You did it! Take this skill and go eat that pie!)                    (Skill Acquired: Devour)", (int)xPosition - 450, (int)yPosition + 330);
+		//							}
+		//
+		//							else {
+		//								questGiven = true;
+		//								g2.drawImage(Images.ScaledTextBox, (int)xPosition - 500, (int)yPosition + 180, null);
+		//								g2.drawString("POYO POYO POYO!", (int)xPosition - 450, (int)yPosition + 240);
+		//								g2.drawString("(Kill Jovan for me and I'll teach you how to eat that pie outside.)", (int)xPosition - 450, (int)yPosition + 270);
+		//							}
+		//						}
+		//					}
+		//				}
+		//			}
+		//		}
+	}
+
+
+
 	private void UpdateNextMove() {
 		switch (facing) {
 		case "Up":
@@ -178,8 +232,9 @@ public class Player extends BaseDynamicEntity implements Fighter {
 
 		canMove = true;
 
-		if (handler.getKeyManager().debugButton) {
+		if (handler.getKeyManager().debugButton && inputCooldown == false) {
 			GameSetUp.DEBUGMODE = !GameSetUp.DEBUGMODE;
+			inputCooldown = true;
 		}
 
 		if (GameSetUp.DEBUGMODE == true) {
@@ -254,7 +309,7 @@ public class Player extends BaseDynamicEntity implements Fighter {
 						}
 						else {}
 					}
-					
+
 					else if (w.getType().startsWith("Door")) {
 						canMove = true;
 
@@ -376,13 +431,6 @@ public class Player extends BaseDynamicEntity implements Fighter {
 								checkInWorld = false;
 								System.out.println("Left Town");
 								setWidthAndHeight(InMapWidthFrontAndBack, InMapHeightFront);
-							}
-							
-							else if (iw.getType().equals("Quest")) {
-								if (handler.getKeyManager().interactButton) {
-									// dunno if will be used, check render
-								}
-								
 							}
 						}
 					}
