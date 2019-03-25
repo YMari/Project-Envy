@@ -71,9 +71,9 @@ public class KeyManager implements KeyListener {
 		pbutt = keys[KeyEvent.VK_ESCAPE];
 		runbutt = keys[KeyEvent.VK_SHIFT];
 		
-		debugButton = keys[KeyEvent.VK_F7];
-		healButton = keys[KeyEvent.VK_H];
-		interactButton = keys[KeyEvent.VK_E];
+		debugButton = keys[KeyEvent.VK_F7];   // debug button (F7)
+		healButton = keys[KeyEvent.VK_H];   // heal button (H)
+		interactButton = keys[KeyEvent.VK_E];   // interaction button (E)
 
 	}
 

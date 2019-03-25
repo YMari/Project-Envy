@@ -24,7 +24,7 @@ public class DynamicQuestNPC extends BaseDynamicEntity {
 		this.setXOffset(xPosition);
 		this.setYOffset(yPosition);
 
-		blink = new Animation(1000, Images.kirbyNPC);
+		blink = new Animation(1000, Images.kirbyNPC);   // blinking animation
 		collision = new Rectangle();
 	}
 	
@@ -35,7 +35,7 @@ public class DynamicQuestNPC extends BaseDynamicEntity {
 	
 	@Override
 	public void render(Graphics g) {
-		if (TownArea.isInTown == true) {
+		if (TownArea.isInTown == true) {   // render only when in town
 		g.drawImage(blink.getCurrentFrame(), (int)(handler.getXInWorldDisplacement() + xPosition),(int)( handler.getYInWorldDisplacement() + yPosition), width, height, null);
 		}
 	}

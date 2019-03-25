@@ -90,7 +90,6 @@ public class Player extends BaseDynamicEntity implements Fighter {
 			if (switchingCoolDown >= 30) {
 				GameSetUp.SWITCHING = false;
 				switchingCoolDown = 0;
-
 			}
 
 			if (State.getState().equals(handler.getGame().inWorldState)) {
@@ -99,6 +98,7 @@ public class Player extends BaseDynamicEntity implements Fighter {
 				checkInWorld = false;
 			}
 			
+			//////// cooldown for keys pressed, so it doesn't spam itself (used in debug and interact button)
 			if (inputCooldown) {
 				inputCooldownTimer++;
 			}
@@ -106,10 +106,13 @@ public class Player extends BaseDynamicEntity implements Fighter {
 				inputCooldown = false;
 				inputCooldownTimer = 0;
 			}
-
+			/////////////////////
+			
 		}
 	}
 
+	///////// method to render the text box provided by the dynamic entity DynamicQuestNPC
+	///////// felt more appropriate to place it here than in the entity's class
 	public void TextBoxRender(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 		if (TownArea.isInTown) {
@@ -150,6 +153,7 @@ public class Player extends BaseDynamicEntity implements Fighter {
 		}
 	}
 
+	
 	@Override
 	public void render(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
@@ -168,37 +172,6 @@ public class Player extends BaseDynamicEntity implements Fighter {
 
 		TextBoxRender(g2);
 
-		//		if (TownArea.isInTown) {
-		//			for (InWorldWalls iw : TownArea.townWalls) {
-		//				g2.setFont(new Font("Arial", Font.BOLD, 22));
-		//				g2.setColor(Color.BLACK);
-		//				if (nextArea.intersects(iw)) {
-		//					if ((iw.getType().equals("Quest"))) {
-		//						g2.drawImage(Images.ScaledEKey, (int) xPosition + 5, (int) yPosition - 75, null);
-		//						
-		//						if (handler.getKeyManager().interactButton) {
-		//							if (questGiven == true && handler.getWorldManager().questKill == true) {
-		//								handler.getWorldManager().questCompleted = true;
-		//								setSkill("Devour");
-		//								skillAcquired = true;
-		//								g2.drawImage(Images.ScaledTextBox, (int)xPosition - 500, (int)yPosition + 180, null);
-		//								g2.drawString("POYO POYO POYO!", (int)xPosition - 450, (int)yPosition + 240);
-		//								g2.drawString("(Kill Jovan for me and I'll teach you how to eat that pie outside.)", (int)xPosition - 450, (int)yPosition + 270);
-		//								g2.drawString("POYO POYO POYO! POYO POYO!", (int)xPosition - 450, (int)yPosition + 300);
-		//								g2.drawString("(OH! You did it! Take this skill and go eat that pie!)                    (Skill Acquired: Devour)", (int)xPosition - 450, (int)yPosition + 330);
-		//							}
-		//
-		//							else {
-		//								questGiven = true;
-		//								g2.drawImage(Images.ScaledTextBox, (int)xPosition - 500, (int)yPosition + 180, null);
-		//								g2.drawString("POYO POYO POYO!", (int)xPosition - 450, (int)yPosition + 240);
-		//								g2.drawString("(Kill Jovan for me and I'll teach you how to eat that pie outside.)", (int)xPosition - 450, (int)yPosition + 270);
-		//							}
-		//						}
-		//					}
-		//				}
-		//			}
-		//		}
 	}
 
 
@@ -232,12 +205,12 @@ public class Player extends BaseDynamicEntity implements Fighter {
 
 		canMove = true;
 
-		if (handler.getKeyManager().debugButton && inputCooldown == false) {
+		if (handler.getKeyManager().debugButton && inputCooldown == false) {   // button to toggle debug mode
 			GameSetUp.DEBUGMODE = !GameSetUp.DEBUGMODE;
 			inputCooldown = true;
 		}
 
-		if (GameSetUp.DEBUGMODE == true) {
+		if (GameSetUp.DEBUGMODE == true) {   // button to heal health and mana if debug mode is on
 			if (handler.getKeyManager().healButton) {
 				handler.getEntityManager().getPlayer().health = handler.getEntityManager().getPlayer().maxHealth;
 				handler.getEntityManager().getPlayer().mana = handler.getEntityManager().getPlayer().maxMana;
@@ -342,7 +315,7 @@ public class Player extends BaseDynamicEntity implements Fighter {
 							State.setState(handler.getGame().inWorldState.setArea(InWorldState.SArea));
 						}
 
-						if (w.getType().equals("Door Town")) {
+						if (w.getType().equals("Door Town")) {   // Entrance to the town in the world area
 							checkInWorld = true;
 							InWorldState.townArea.oldPlayerXCoord = (int) (handler.getXDisplacement());
 							InWorldState.townArea.oldPlayerYCoord = (int) (handler.getYDisplacement());
@@ -360,8 +333,8 @@ public class Player extends BaseDynamicEntity implements Fighter {
 							State.setState(handler.getGame().inWorldState.setArea(InWorldState.townArea));
 						}
 					}
-					else if (w.getType().startsWith("Quest Detection")) {
-						if (skillAcquired == true) {
+					else if (w.getType().startsWith("Quest Detection")) {   // detects if all the conditions were met
+						if (skillAcquired == true) {						// for the cave obstacle to be removed
 							handler.getWorldManager().removeObstacle = true;
 						}
 					}
@@ -407,7 +380,7 @@ public class Player extends BaseDynamicEntity implements Fighter {
 				}
 			}
 
-			else if (TownArea.isInTown) {
+			else if (TownArea.isInTown) {   // setup for the town area
 				for (InWorldWalls iw : TownArea.townWalls) {
 					if (nextArea.intersects(iw)) {
 						if (iw.getType().equals("Wall"))

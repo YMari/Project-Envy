@@ -80,7 +80,6 @@ public class Images {
 
 	public static SpriteSheet smokeHouseSheet;
 	public static SpriteSheet statueSheet;
-//	public static SpriteSheet kirbyNPCSheet;
 
 	public static BufferedImage[] smokeHouse;
 
@@ -97,7 +96,6 @@ public class Images {
 	public static BufferedImage BPie;
 	public static BufferedImage TownMap;
 	public static BufferedImage[] kirbyNPC;
-//	public static BufferedImage kirbyNPC;
 	public static Image ScaledTown;
 	public static Image TextBox;
 	public static Image ScaledTextBox;
@@ -741,8 +739,8 @@ public class Images {
 		ScaledCave = Images.CaveMap.getScaledInstance(3680, 4000, Image.SCALE_SMOOTH); // 368x400 pixel image
 
 		ScaledTown = Images.TownMap.getScaledInstance(2155, 2000, Image.SCALE_SMOOTH); // 431x400 *5
-		ScaledTextBox = Images.TextBox.getScaledInstance(1008, 184, Image.SCALE_SMOOTH); //252x46 *4
-		ScaledEKey = Images.EKey.getScaledInstance(50, 50, Image.SCALE_SMOOTH); //157x155
+		ScaledTextBox = Images.TextBox.getScaledInstance(1008, 184, Image.SCALE_SMOOTH); // 252x46 *4
+		ScaledEKey = Images.EKey.getScaledInstance(50, 50, Image.SCALE_SMOOTH); // 157x155
 	}
 
 	

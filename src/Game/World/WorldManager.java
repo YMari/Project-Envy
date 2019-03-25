@@ -54,15 +54,6 @@ public class WorldManager {
 
 		this.entityManager.AddEntity(new CaveObstacle (handler, 1642, 90));
 
-		//		if (questComplete == true) {
-		//			for(BaseEntity obstacle : handler.getEntityManager().getEntities()) {
-		//				if (obstacle instanceof CaveObstacle) {
-		////					handler.getEntityManager().RemoveEntity((CaveObstacle)obstacle);	
-		//					handler.getEntityManager().getEntities().remove(obstacle);	
-		//				}
-		//			}
-		//		}
-
 		AddWalls();
 
 	}
@@ -107,6 +98,7 @@ public class WorldManager {
 		}
 	}
 
+	///////// method tests if the enemy assigned by the quest is killed
 	public void QuestComplete() {
 		for(BaseEntity enemy : handler.getEntityManager().getEntities()) {
 			if(enemy instanceof EnemyOne) {
@@ -118,31 +110,6 @@ public class WorldManager {
 			}
 		}
 
-
-		//		if (questCompleted == true) {
-		//			for(BaseEntity obstacle : handler.getEntityManager().getEntities()) {
-		//				if (obstacle instanceof CaveObstacle) {
-		//					handler.getEntityManager().RemoveEntity((CaveObstacle)obstacle);	
-		//				}
-		//			}
-		//		}
-
-		//		if (questCompleted == true) {
-		//			for(BaseEntity obstacle : handler.getEntityManager().getEntities()) {
-		//				if (obstacle instanceof CaveObstacle) {
-		////					handler.getEntityManager().RemoveEntity((CaveObstacle)obstacle);	
-		//					handler.getEntityManager().getEntities().remove((CaveObstacle)obstacle);	
-		//				}
-		//			}
-		//		}
-
-		//		if (questCompleted == true) {
-		//		for(BaseEntity obstacle : handler.getEntityManager().getEntities()) {
-		//			if (obstacle instanceof CaveObstacle) {
-		//				handler.getEntityManager().RemoveEntity(obstacle);	
-		//			}
-		//		}
-		//	}
 	}
 
 	// adds all the walls in game

@@ -157,7 +157,6 @@ public class FightState extends InWorldState{
         }
 
         this.moveFightString();
-//        skillUpdate();
 
 
 
@@ -431,11 +430,12 @@ public class FightState extends InWorldState{
             inputCoolDown++;
         }
         
-		if (handler.getKeyManager().debugButton) {
+		if (handler.getKeyManager().debugButton && handler.getEntityManager().getPlayer().inputCooldown == false) {   // button to toggle debug mode while fighting
 			GameSetUp.DEBUGMODE = !GameSetUp.DEBUGMODE;
+			handler.getEntityManager().getPlayer().inputCooldown = true;
 		}
 		
-		if (handler.getKeyManager().healButton && GameSetUp.DEBUGMODE == true) {
+		if (handler.getKeyManager().healButton && GameSetUp.DEBUGMODE == true) {   // allows the player to heal while on their turn in debug mode
 			handler.getEntityManager().getPlayer().setHealth(handler.getEntityManager().getPlayer().getMaxHealth());
 			handler.getEntityManager().getPlayer().setMana(handler.getEntityManager().getPlayer().getMaxMana());
 		}
@@ -483,14 +483,6 @@ public class FightState extends InWorldState{
         eWait = System.currentTimeMillis() + 3500;
     }
     
-//    private void skillUpdate() {
-//        if (handler.getWorldManager().questCompleted == true) {
-//        	skill = true;
-//        	handler.getEntityManager().getPlayer().skillAcquired = true;
-//        	handler.getEntityManager().getPlayer().setSkill("Devour");
-//        }
-//    }
-    
     private void setUiManager() {
         uiManager = new UIManager(handler);
 
@@ -519,7 +511,7 @@ public class FightState extends InWorldState{
             public void onClick() {
             	if(handler.getEntityManager().getPlayer().getMana()>=25) {
             		System.out.println("Skill");
-            		skill = handler.getEntityManager().getPlayer().skillAcquired;
+            		skill = handler.getEntityManager().getPlayer().skillAcquired;   // skill turns on when acquired
             	}
 
             }

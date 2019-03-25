@@ -112,7 +112,7 @@ public class TownArea extends BaseArea {
     	
     	// QuestEntity Wall
     	townWalls.add(new InWorldWalls(handler, 1450, 1300, 28*5, 32*5, "Wall"));
-    	townWalls.add(new InWorldWalls(handler, 1425, 1275, 28*5 + 50, 32*5 + 50, "Quest"));
+    	townWalls.add(new InWorldWalls(handler, 1425, 1275, 28*5 + 50, 32*5 + 50, "Quest"));   // detection radius for the quest prompt
 
 
     }

@@ -91,7 +91,7 @@ public class EntityManager {
 		return player;
 	}
 	
-	public ArrayList<BaseEntity> getEntities() {
+	public ArrayList<BaseEntity> getEntities() {   // getter for the entities array
 		return entities;
 	}
 }
