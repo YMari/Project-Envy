@@ -1,2 +1,2 @@
 # PA2
-Yavier Mari & Kathia Couret
+Yavier Mari Rodriguez & Kathia Couret
